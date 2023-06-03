@@ -19,7 +19,7 @@ def main():
     allfilelists = []
     fileswithpicturepath = []
     # Kijkt naar de eerste volgende path (test, train, validatie)
-    filelist = filedirectory("cartoon_backup\\data")
+    filelist = filedirectory("fiets_data")
 
     # Kijkt naar de eerst volgende path (bean, conan, doraemon, naruto, shinchan)
     for i in filelist:

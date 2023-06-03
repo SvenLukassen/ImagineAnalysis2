@@ -51,7 +51,7 @@ def model_parameters():
         tf.keras.layers.Dropout(0.2),
         tf.keras.layers.Flatten(),
         tf.keras.layers.Dense(128, activation='relu'),
-        tf.keras.layers.Dense(2, activation='softmax')
+        tf.keras.layers.Dense(3, activation='softmax')
     ])
 
     return model
@@ -60,7 +60,7 @@ def model_parameters():
 def run_model(model, train_generator, validate_generator, test_generator):
     # Compile the model
     model.compile(optimizer='adam',
-                  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+                  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
                   metrics=['accuracy'])
 
     epochs = 10
@@ -70,16 +70,16 @@ def run_model(model, train_generator, validate_generator, test_generator):
                         epochs=epochs)
 
     # Evaluate the model
-    test_loss, test_acc = model.evaluate(validate_generator, verbose=2)
+    test_loss, test_acc = model.evaluate(test_generator, verbose=2)
     print(f"Test accuracy: {test_acc}")
 
-    model_dir = 'trainedModels/'
+    # model_dir = 'trainedModels/'
 
     # Save the model to disk
-    tf.saved_model.save(model, model_dir)
-
+    # tf.saved_model.save(model, model_dir)
+    #
     # Make predictions on the test data
-    y_pred = model.predict(test_generator)
+    # y_pred = model.predict(test_generator)
 
     # Convert the test data labels to one-hot encoded format
     # y_true = np.array(test_generator.classes)
