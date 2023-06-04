@@ -17,7 +17,7 @@ def main():
     allfilelists = []
     fileswithpicturepath = []
     # Kijkt naar de eerste volgende path (test, train, validatie)
-    filelist = filedirectory(r"C:\Users\swans\PycharmProjects\pythonProject3\beans_data")
+    filelist = filedirectory(r'./beans_data')
 
     # Kijkt naar de eerst volgende path (bean, conan, doraemon, naruto, shinchan)
     for i in filelist:
