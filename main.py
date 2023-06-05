@@ -6,7 +6,7 @@ from keras.preprocessing.image import ImageDataGenerator
 
 def data_parameters(train_dir, validate_dir, test_dir):
     # Define the image size and batch size
-    IMG_SIZE = (64, 64)
+    IMG_SIZE = (256, 256)
     BATCH_SIZE = 32
 
     # Define the data generators
@@ -42,7 +42,7 @@ def data_parameters(train_dir, validate_dir, test_dir):
 def model_parameters():
     # Define the model architecture
     model = tf.keras.models.Sequential([
-        tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)),
+        tf.keras.layers.Conv2D(32, (3, 3), activation='relu', input_shape=(256, 256, 3)),
         tf.keras.layers.MaxPooling2D((2, 2)),
         tf.keras.layers.Conv2D(64, (3, 3), activation='relu'),
         tf.keras.layers.MaxPooling2D((2, 2)),
@@ -63,7 +63,7 @@ def run_model(model, train_generator, validate_generator, test_generator):
                   loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
                   metrics=['accuracy'])
 
-    epochs = 10
+    epochs = 20
     # Train the model
     history = model.fit(train_generator,
                         validation_data=validate_generator,
@@ -93,9 +93,9 @@ def run_model(model, train_generator, validate_generator, test_generator):
     val_loss = history.history['val_loss']
 
 def main():
-    train_dir = r'C:\Users\swans\PycharmProjects\pythonProject3\fiets_data\train'
-    validate_dir = r'C:\Users\swans\PycharmProjects\pythonProject3\fiets_data\validation'
-    test_dir = r'C:\Users\swans\PycharmProjects\pythonProject3\fiets_data\test'
+    train_dir = r'./beans_data/test'
+    validate_dir = r'./beans_data/train'
+    test_dir = r'./beans_data/validation'
     train_generator, validate_generator, test_generator = data_parameters(train_dir, validate_dir, test_dir)
     model = model_parameters()
     run_model(model, train_generator, validate_generator, test_generator)
