@@ -35,6 +35,4 @@ def main():
         for picture in dir:
             # Zet de images om van jpg naar png
             convert_image(picture)
-            # verwijderd de jpg image
-            # os.remove(picture)
 main()
