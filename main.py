@@ -92,6 +92,7 @@ def run_model(model, train_generator, validate_generator, test_generator):
     loss = history.history['loss']
     val_loss = history.history['val_loss']
 
+
 def main():
     train_dir = r'./beans_data/test'
     validate_dir = r'./beans_data/train'
