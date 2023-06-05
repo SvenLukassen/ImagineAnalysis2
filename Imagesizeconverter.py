@@ -2,6 +2,11 @@ from PIL import Image
 import os
 
 def filedirectory(filedir):
+    """
+
+    :param filedir:
+    :return:
+    """
     filelist = []
     for filename in os.listdir(filedir):
         f = os.path.join(filedir, filename)
@@ -9,6 +14,11 @@ def filedirectory(filedir):
     return filelist
 
 def convert_image(picture):
+    """
+
+    :param picture:
+    :return:
+    """
     im = Image.open(picture)
     new_image = im.resize((256, 256))
     new_image.save(picture)
