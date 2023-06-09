@@ -6,6 +6,7 @@ def filedirectory(filedir):
     """ Opens a folder with multiple files in it and puts the
     filenames into a list
 
+    :param filedir: absolute path of a directory
     :return: List of filenames - list
     """
     try:
