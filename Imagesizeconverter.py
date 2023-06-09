@@ -1,48 +1,67 @@
 from PIL import Image
 import os
 
-def filedirectory(filedir):
-    """
 
-    :param filedir:
-    :return:
+def filedirectory(filedir):
+    """ Opens a folder with multiple files in it and puts the
+    filenames into a list
+
+    :return: List of filenames - list
     """
-    filelist = []
-    for filename in os.listdir(filedir):
-        f = os.path.join(filedir, filename)
-        filelist.append(f)
+    try:
+        filelist = []
+        # Gets all the filenames from a certain folder
+        for filename in os.listdir(filedir):
+            # Makes a value of the path for the input files
+            f = os.path.join(filedir, filename)
+            filelist.append(f)
+    except NotADirectoryError:
+        print("Directory not found")
+    except FileExistsError:
+        print("File already exists")
+    except FileNotFoundError:
+        print("File not found")
+
     return filelist
 
-def convert_image(picture):
-    """
 
-    :param picture:
-    :return:
+def convert_image(picture):
+    """Converts image sizes to 256,256
+
+    :param picture: picture from a directory
+    :return: picture with the size 256x256
     """
-    im = Image.open(picture)
-    new_image = im.resize((256, 256))
-    new_image.save(picture)
+    try:
+        im = Image.open(picture)
+        # Resizes the image to 256x256
+        new_image = im.resize((256, 256))
+        # Saves the new picture
+        new_image.save(picture)
+    except FileNotFoundError:
+        print("File not found")
+
 
 def main():
     allfilelists = []
     fileswithpicturepath = []
-    # Kijkt naar de eerste volgende path (test, train, validatie)
+    # Checks a folder and gives back the test, validation, training folders
     filelist = filedirectory(r'./beans_data')
 
-    # Kijkt naar de eerst volgende path (bean, conan, doraemon, naruto, shinchan)
+    # Checks the folders test, validation, training and returns folders
+    # angular_leaf_spot, bean_rust, healthy
     for i in filelist:
         filelist = filedirectory(i)
         allfilelists.append(filelist)
 
-    # Kijkt naar images in de hele path (1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg etc...)
+    # Gives the whole path of the images in the folder angular_leaf_spot,
+    # bean_rust, healthy
     for i in allfilelists:
         for i2 in i:
             filewithpicturelist = filedirectory(i2)
             fileswithpicturepath.append(filewithpicturelist)
 
-    # Pakt de hele path van de images
     for dir in fileswithpicturepath:
         for picture in dir:
-            # Zet de images om van jpg naar png
+            # Converts image sizes
             convert_image(picture)
 main()
